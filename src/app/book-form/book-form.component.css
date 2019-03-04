@@ -1,0 +1,8 @@
+.book-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-form > [matInput] {
+  width: 100%;
+}

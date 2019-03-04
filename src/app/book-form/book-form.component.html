@@ -1,0 +1,17 @@
+<form class="book-form" (ngSubmit)="onSubmit()" #bookForm="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Book Title" type="text" required [(ngModel)]="newBook.title" name="title">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select matInput placeholder="Category" required [(ngModel)]="newBook.category" name="category">
+      <mat-option *ngFor="let cat of categories" [value]="cat.value">
+        {{ cat.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput rows="5" placeholder="Description" required [(ngModel)]="newBook.description" name="description"></textarea>
+  </mat-form-field>
+  <br/>
+  <button mat-raised-button type="submit" color="primary">Add</button>
+</form>
