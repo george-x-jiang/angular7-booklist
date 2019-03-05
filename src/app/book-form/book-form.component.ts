@@ -21,7 +21,7 @@ export class BookFormComponent {
 
   @ViewChild('bookForm') form: any;
 
-  @Output() bookSubmitted: EventEmitter<any> = new EventEmitter();
+  @Output() bookSubmitted: EventEmitter<Book> = new EventEmitter();
 
   constructor(public dataService: DataService) {
   }
@@ -33,8 +33,9 @@ export class BookFormComponent {
     }
 
     this.newBook.index = this.dataService.dataLength();
-    this.bookSubmitted.emit({data: this.newBook});
+    this.bookSubmitted.emit(this.newBook);
 
+    // Bind new object to the form before resetting
     this.newBook = {
       index: 0,
       title: '',

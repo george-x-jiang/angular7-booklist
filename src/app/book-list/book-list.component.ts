@@ -22,13 +22,13 @@ export class BookListComponent {
     return this.dataService.dataLength();
   }
 
-  deleteBook(id) {
-    this.dataService.deleteBook(id);
+  deleteBook(i: number) {
+    this.dataService.deleteBook(i);
     this.dataSource = new BookDataSource(this.dataService);
   }
 
-  addBook(newBook) {
-    this.dataService.addBook(newBook.data);
+  addBook(newBook: Book) {
+    this.dataService.addBook(newBook);
     this.dataSource = new BookDataSource(this.dataService);
   }
 }
