@@ -1,4 +1,4 @@
-<form class="book-form" (ngSubmit)="onSubmit()" #bookForm="ngForm">
+<form class="book-form" (ngSubmit)="onSubmit(bookForm)" #bookForm="ngForm">
   <mat-form-field>
     <input matInput placeholder="Book Title" type="text" required [(ngModel)]="newBook.title" name="title">
   </mat-form-field>

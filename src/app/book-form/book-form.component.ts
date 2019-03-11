@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DataService } from '../service/data.service';
 import { Book } from '../model/book';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-book-form',
@@ -12,23 +13,21 @@ export class BookFormComponent {
   categories = this.dataService.getCategories();
 
   newBook: Book = {
-    index: 0,
-    title: '',
-    category: '',
-    description: '',
+    index: null,
+    title: null,
+    category: null,
+    description: null,
     date_added: new Date()
   };
-
-  @ViewChild('bookForm') form: any;
 
   @Output() bookSubmitted: EventEmitter<Book> = new EventEmitter();
 
   constructor(public dataService: DataService) {
   }
 
-  onSubmit(): void {
+  onSubmit(bookForm: NgForm): void {
 
-    if (!this.form.valid) {
+    if (!bookForm.form.valid) {
       return;
     }
 
@@ -37,13 +36,13 @@ export class BookFormComponent {
 
     // Bind new object to the form before resetting
     this.newBook = {
-      index: 0,
-      title: '',
-      category: '',
-      description: '',
+      index: null,
+      title: null,
+      category: null,
+      description: null,
       date_added: new Date()
     };
 
-    this.form.resetForm();
+    bookForm.resetForm();
   }
 }
