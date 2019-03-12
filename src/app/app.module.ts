@@ -8,7 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DataService } from './service/data.service';
 import { BookListComponent } from './book-list/book-list.component';
 import { BookFormComponent } from './book-form/book-form.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    FormsModule,
+    // FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

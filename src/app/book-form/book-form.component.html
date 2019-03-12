@@ -1,16 +1,16 @@
-<form class="book-form" (ngSubmit)="onSubmit(bookForm)" #bookForm="ngForm">
+<form [formGroup]="bookForm" class="book-form" (ngSubmit)="onSubmit(theForm)" #theForm="ngForm" novalidate >
   <mat-form-field>
-    <input matInput placeholder="Book Title" type="text" required [(ngModel)]="newBook.title" name="title">
+    <input matInput placeholder="Book Title" type="text" formControlName="title">
   </mat-form-field>
   <mat-form-field>
-    <mat-select matInput placeholder="Category" required [(ngModel)]="newBook.category" name="category">
-      <mat-option *ngFor="let cat of categories" [value]="cat.value">
+    <select matNativeControl placeholder="Category" formControlName="category">
+      <option *ngFor="let cat of categories" [value]="cat.value">
         {{ cat.viewValue }}
-      </mat-option>
-    </mat-select>
+      </option>
+    </select>
   </mat-form-field>
   <mat-form-field>
-    <textarea matInput rows="5" placeholder="Description" required [(ngModel)]="newBook.description" name="description"></textarea>
+    <textarea matInput rows="5" placeholder="Description" formControlName="description"></textarea>
   </mat-form-field>
   <br/>
   <button mat-raised-button type="submit" color="primary">Add</button>

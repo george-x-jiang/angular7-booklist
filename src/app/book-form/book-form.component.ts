@@ -1,48 +1,43 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DataService } from '../service/data.service';
 import { Book } from '../model/book';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-book-form',
   templateUrl: './book-form.component.html',
   styleUrls: ['./book-form.component.css']
 })
-export class BookFormComponent {
+export class BookFormComponent implements OnInit {
 
   categories = this.dataService.getCategories();
 
-  newBook: Book = {
-    index: null,
-    title: null,
-    category: null,
-    description: null,
-    date_added: new Date()
-  };
+  bookForm: FormGroup;
 
   @Output() bookSubmitted: EventEmitter<Book> = new EventEmitter();
 
   constructor(public dataService: DataService) {
   }
 
-  onSubmit(bookForm: NgForm): void {
+  ngOnInit() {
+    this.bookForm = new FormGroup({
+      title: new FormControl(null, [Validators.required]),
+      category: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required])
+    });
+  }
 
-    if (!bookForm.form.valid) {
+  onSubmit(theForm: NgForm): void {
+
+    if (!this.bookForm.valid) {
       return;
     }
 
-    this.newBook.index = this.dataService.dataLength();
-    this.bookSubmitted.emit(this.newBook);
+    const index = this.dataService.dataLength();
+    this.bookSubmitted.emit({index, ...this.bookForm.value, date_added: new Date()});
 
-    // Bind new object to the form before resetting
-    this.newBook = {
-      index: null,
-      title: null,
-      category: null,
-      description: null,
-      date_added: new Date()
-    };
-
-    bookForm.resetForm();
+    // Resetting the formGroup does not work with Angular Material
+    // this.bookForm.reset();
+    theForm.resetForm();
   }
 }
